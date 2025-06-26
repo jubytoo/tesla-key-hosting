@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Clave Tesla</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      padding: 2em;
+    }
+    #qr {
+      margin: 2em auto;
+    }
+    .url {
+      font-size: 0.9em;
+      word-break: break-all;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h1>Emparejar Clave Tesla</h1>
+  <p>Escanea este código QR con la app de Tesla para emparejar tu clave:</p>
+  <canvas id="qr"></canvas>
+  <p class="url" id="urlText"></p>
+
+  <script>
+    const user = location.hostname.split('.')[0];
+    const pemUrl = `https://${user}.github.io/tesla-key-hosting/.well-known/appspecific/com.tesla.3p.public-key.pem`;
+    const qr = new QRious({
+      element: document.getElementById('qr'),
+      value: pemUrl,
+      size: 240,
+    });
+    document.getElementById('urlText').textContent = pemUrl;
+  </script>
+</body>
+</html>
